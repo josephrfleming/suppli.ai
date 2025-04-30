@@ -1,9 +1,9 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: postgres                 # Your local PostgreSQL username
-  password: password                 # Your local PostgreSQL password
-  host: localhost                    # For local Windows PostgreSQL
+  username: postgres                 # Local PostgreSQL username
+  password: password                 # Local PostgreSQL password
+  host: localhost                    # Local PostgreSQL host
   port: 5432                         # Default PostgreSQL port
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
@@ -17,4 +17,8 @@ test:
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>    # Use Render's provided DATABASE_URL
+  url: <%= ENV['DATABASE_URL'] %>
+
+  cable:
+    adapter: postgresql
+    url: <%= ENV['DATABASE_URL'] %>
