@@ -1,10 +1,10 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: postgres                 # Local PostgreSQL username
-  password: password                 # Local PostgreSQL password
-  host: localhost                    # Local PostgreSQL host
-  port: 5432                         # Default PostgreSQL port
+  username: postgres                 # Your local PostgreSQL username
+  password: password                 # Your local PostgreSQL password
+  host: localhost                    # Your local PostgreSQL host
+  port: 5432                         # PostgreSQL port
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
@@ -19,6 +19,6 @@ production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
 
-  cable:
-    adapter: postgresql
-    url: <%= ENV['DATABASE_URL'] %>
+cable:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
