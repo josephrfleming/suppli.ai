@@ -1,5 +1,7 @@
 services:
   - type: web
-    name: suppli-ai          # <- Your app's name here (letters/dashes only)
-    runtime: ruby            # Leave as-is
-    plan: free               # Make sure it's "free" to avoid charges
+    name: suppli-ai           # your app's name here
+    runtime: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"   # recommended for Rails apps
+    startCommand: "bundle exec rails server -b 0.0.0.0 -p $PORT"
