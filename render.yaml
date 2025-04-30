@@ -1,0 +1,5 @@
+services:
+  - type: web
+    name: suppli-ai          # <- Your app's name here (letters/dashes only)
+    runtime: ruby            # Leave as-is
+    plan: free               # Make sure it's "free" to avoid charges
