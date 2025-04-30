@@ -51,7 +51,7 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"
   gem "brakeman",          require: false          # Static security scan
   gem "rubocop-rails-omakase", require: false      # Code style
-  gem "rspec-rails", "~> 6.1"                      # Test suite
+  gem "rspec-rails", "~> 8.0"                      # Test suite
   gem "factory_bot_rails"                          # Test factories
   gem "faker"                                      # Fake data
   gem "letter_opener", group: :development         # View mails in browser
