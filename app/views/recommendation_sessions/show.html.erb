@@ -91,13 +91,12 @@ overview = data['overview'].to_s.strip
 
 <%# page navigation %>
 <div class="d-flex flex-wrap gap-3">
-  <%= link_to '← New recommendation',
-              new_recommendation_session_path,
-              class: 'btn btn-outline-secondary' %>
+  <%= link_to '← Home', root_path, class: 'btn btn-outline-secondary' %>
+
+  <%= link_to 'New recommendation', new_recommendation_session_path, class: 'btn btn-outline-primary' %>
 
   <% if user_signed_in? %>
-    <%= link_to 'Recommendation history',
-                recommendation_sessions_path,
-                class: 'btn btn-primary' %>
+    <%= link_to 'Recommendation history', recommendation_sessions_path, class: 'btn btn-primary' %>
   <% end %>
 </div>
+

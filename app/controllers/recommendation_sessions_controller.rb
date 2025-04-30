@@ -1,4 +1,3 @@
-# app/controllers/recommendation_sessions_controller.rb
 class RecommendationSessionsController < ApplicationController
   # guests can view, not modify
   skip_before_action :authenticate_user!, only: %i[index new create show explanation]
@@ -21,6 +20,15 @@ class RecommendationSessionsController < ApplicationController
 
   # POST /recommendation_sessions — save & generate plan
   def create
+    merged_notes = [
+      params[:recommendation_session][:medical_conditions].presence && "Medical conditions: #{params[:recommendation_session][:medical_conditions]}",
+      params[:recommendation_session][:current_medications].presence && "Current medications: #{params[:recommendation_session][:current_medications]}",
+      params[:recommendation_session][:current_supplements].presence && "Current supplements: #{params[:recommendation_session][:current_supplements]}"
+    ].compact.join("\n")
+
+    # insert into the notes field
+    params[:recommendation_session][:notes] = merged_notes
+
     @session = RecommendationSession.new(session_params)
     @session.user = current_user if user_signed_in?
 
@@ -60,6 +68,7 @@ class RecommendationSessionsController < ApplicationController
   def session_params
     params.require(:recommendation_session).permit(
       :budget, :notes,
+      :medical_conditions, :current_medications, :current_supplements,
       area_of_interest: [], dietary_restrictions: []
     )
   end

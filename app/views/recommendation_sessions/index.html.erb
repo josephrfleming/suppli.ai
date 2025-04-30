@@ -28,7 +28,14 @@
         <tr>
           <td><%= l s.created_at, format: :short %></td>
           <td class="text-end">$<%= s.budget %></td>
-          <td><%= Array(s.area_of_interest).reject(&:blank?).join(", ") %></td>
+          <td><%= begin
+            JSON.parse(s.area_of_interest.to_s)
+              .reject(&:blank?)
+              .join(", ")
+          rescue
+            s.area_of_interest.to_s
+          end %></td>
+
           <td class="text-end">
             <%= link_to "View", s, class: "btn btn-sm btn-outline-primary" %>
           </td>

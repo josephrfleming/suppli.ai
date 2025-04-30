@@ -5,7 +5,7 @@
 
   <h2 class="h4 mb-4">Personalize Your Recommendations</h2>
 
-  <!-- budget input -->
+  <!-- ▸ Budget slider -->
   <div class="mb-4" data-controller="range">
     <%= f.label :budget, "Budget", class: "form-label fw-semibold" %>
 
@@ -22,7 +22,7 @@
     </small>
   </div>
 
-  <!-- interest areas (multi-select) -->
+  <!-- ▸ Area of interest -->
   <div class="mb-4">
     <%= f.label :area_of_interest, "Area of interest", class: "form-label fw-semibold" %>
     <%= f.select :area_of_interest,
@@ -31,7 +31,7 @@
                  {}, multiple: true, class: "form-select" %>
   </div>
 
-  <!-- dietary preferences -->
+  <!-- ▸ Dietary restrictions -->
   <div class="mb-4">
     <%= f.label :dietary_restrictions, "Dietary restriction",
                 class: "form-label fw-semibold" %><br>
@@ -46,13 +46,26 @@
     <% end %>
   </div>
 
-  <!-- extra notes -->
+  <!-- ▸ Medical info -->
   <div class="mb-4">
-    <%= f.label :notes, "Medical conditions / current supplements",
-                class: "form-label fw-semibold" %>
-    <%= f.text_field :notes,
+    <%= f.label :medical_conditions, "Medical conditions", class: "form-label fw-semibold" %>
+    <%= f.text_field :medical_conditions,
                      class: "form-control",
-                     placeholder: "e.g. Type-2 diabetes, taking vitamin D3" %>
+                     placeholder: "e.g. Type-2 diabetes, dementia" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :current_medications, "Current medications", class: "form-label fw-semibold" %>
+    <%= f.text_field :current_medications,
+                     class: "form-control",
+                     placeholder: "e.g. Metformin, Atorvastatin" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :current_supplements, "Current supplements", class: "form-label fw-semibold" %>
+    <%= f.text_field :current_supplements,
+                     class: "form-control",
+                     placeholder: "e.g. Vitamin D3, Omega-3" %>
   </div>
 
   <%= f.submit "Get Recommendations", class: "btn btn-primary btn-lg w-100" %>
