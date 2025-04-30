@@ -1,0 +1,52 @@
+<!-- app/views/home/index.html.erb -->
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 text-center">
+
+      <h1 class="display-4 mb-4"><%= @title %></h1>
+
+      <div class="lead mb-5">
+        <%= raw @content %>
+      </div>
+
+      <% unless user_signed_in? %>
+        <!-- guest options -->
+        <div class="d-grid gap-3 d-sm-flex justify-content-center">
+          <%= link_to "Log in",
+                      new_user_session_path,
+                      class: "btn btn-outline-primary btn-lg px-4" %>
+
+          <%= link_to "Register",
+                      new_user_registration_path,
+                      class: "btn btn-primary btn-lg px-4" %>
+
+          <%= link_to "Browse as guest",
+                      categories_path,
+                      class: "btn btn-outline-secondary btn-lg px-4" %>
+
+          <%= link_to "Get personalized plan",
+                      new_recommendation_session_path,
+                      class: "btn btn-success btn-lg px-4" %>
+        </div>
+
+      <% else %>
+        <!-- logged-in options -->
+        <div class="d-grid gap-3 d-sm-flex justify-content-center">
+          <%= link_to "Recommendation history",
+                      recommendation_sessions_path,
+                      class: "btn btn-primary btn-lg px-4" %>
+
+          <%= link_to "New recommendation",
+                      new_recommendation_session_path,
+                      class: "btn btn-success btn-lg px-4" %>
+
+          <%= button_to "Log out",
+                        destroy_user_session_path,
+                        method:  :delete,
+                        class:   "btn btn-outline-danger btn-lg px-4 d-inline" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

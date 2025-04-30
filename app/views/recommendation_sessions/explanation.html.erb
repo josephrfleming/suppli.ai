@@ -1,0 +1,12 @@
+<h1>Why we chose these supplements</h1>
+
+<% if @session.explanation.present? %>
+  <%= simple_format(@session.explanation) %>
+<% else %>
+  <p class="text-muted">Still generating&hellip; please refresh in a moment.</p>
+<% end %>
+
+<hr>
+
+<%= link_to "← Back to recommendations", recommendation_session_path(@session),
+            class: "btn btn-outline-secondary" %>

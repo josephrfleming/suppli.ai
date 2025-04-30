@@ -1,0 +1,4 @@
+# Procfile.dev ─ run with `bin/dev` or `foreman start -f Procfile.dev`
+
+web: env RUBY_DEBUG_OPEN=true bin/rails server
+css: yarn watch:css          # rebuild CSS on every SCSS change

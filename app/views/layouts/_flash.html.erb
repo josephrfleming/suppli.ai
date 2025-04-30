@@ -1,0 +1,10 @@
+<%# app/views/layouts/_flash.html.erb %>
+<% flash.each do |key, message| %>
+  <% next if message.blank? %>
+  <%# Map Rails flash keys to Bootstrap alert classes %>
+  <% class_name = key.to_sym == :notice ? "success" : "danger" %>
+  <div class="alert alert-<%= class_name %> alert-dismissible fade show" role="alert">
+    <%= message %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>

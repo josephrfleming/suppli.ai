@@ -1,0 +1,39 @@
+<%# app/views/products/index.html.erb %>
+<h1>Products</h1>
+<%= render "layouts/flash" %>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Active?</th>
+      <th>Tags</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td><%= product.active? ? "Yes" : "No" %></td>
+        <td><%= render_tags(product) %></td>
+        <td>
+          <%= link_to "View",  product_path(product), class: "btn btn-sm btn-secondary" %>
+          <% if policy(product).edit? %>
+            <%= link_to "Edit", edit_product_path(product), class: "btn btn-sm btn-primary" %>
+          <% end %>
+          <% if policy(product).destroy? %>
+            <%= link_to "Delete", product_path(product),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" },
+                  class: "btn btn-sm btn-danger" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New Product", new_product_path, class: "btn btn-success" %>

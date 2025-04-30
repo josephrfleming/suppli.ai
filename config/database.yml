@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: postgres              # Default PostgreSQL username on Windows
+  password: password  # ← Replace this with your real PostgreSQL password
+  host: localhost                 # Required on Windows
+  port: 5432                      # Default PostgreSQL port
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: suppli_ai_development
+
+test:
+  <<: *default
+  database: suppli_ai_test
+
+production:
+  <<: *default
+  database: suppli_ai_production
+  username: suppli_ai8HtHu1gQoTjhL7fGxdQs8xrKpsbvik6hw3putVyHpump
+
+  password: <%= ENV["SUPPLI_AI_DATABASE_PASSWORD"] %>

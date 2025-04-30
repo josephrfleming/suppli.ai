@@ -1,0 +1,103 @@
+<!-- app/views/recommendation_sessions/show.html.erb -->
+<h1>Your Personalized Recommendations</h1>
+
+<%# normalize data shape %>
+<%
+data = @session.result_json.is_a?(Hash) ? @session.result_json : {}
+rows =
+  if @session.result_json.is_a?(Array)
+    @session.result_json
+  elsif data['supplements'].is_a?(Array)
+    data['supplements']
+  else
+    []
+  end
+total    = (data['total_monthly_cost'] || 0).to_f
+overview = data['overview'].to_s.strip
+%>
+
+<%# show table if we have results %>
+<% if rows.any? %>
+  <% if total.positive? %>
+    <p class="fw-semibold mb-3">
+      Estimated cost for 30&nbsp;days&nbsp;:
+      <span class="text-success">
+        $<%= number_with_precision(total, precision: 2) %>
+      </span>
+    </p>
+  <% end %>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Supplement</th>
+        <th class="text-end">Price&nbsp;/&nbsp;month</th>
+        <th>Dosage</th>
+        <th>Retailer</th>
+        <th>Reason</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% rows.each do |item| %>
+        <% supp_name = item['name'].presence ||
+                       Product.find_by(id: item['supplement_id'])&.name ||
+                       "ID ##{item['supplement_id']}" %>
+
+        <% price    = item['price_per_month'] || item['price'] %>
+        <% retailer = item['retailer'].to_s %>
+        <% shop_url = retailer_url(retailer, supp_name) %>
+
+        <tr>
+          <td><%= supp_name %></td>
+
+          <td class="text-end">
+            $<%= number_with_precision(price.to_f, precision: 2) %>
+          </td>
+
+          <td><%= item['daily_dosage'].presence || '—' %></td>
+
+          <td>
+            <% if shop_url.present? %>
+              <%= link_to retailer,
+                          shop_url,
+                          target: '_blank',
+                          rel:    'noopener',
+                          class:  'text-decoration-none' %>
+            <% else %>
+              <%= retailer.presence || '—' %>
+            <% end %>
+          </td>
+
+          <td><%= item['reason'] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="text-muted">
+    Generating recommendations&hellip; please refresh in a moment.
+  </p>
+<% end %>
+
+<%# show overview if present %>
+<% if overview.present? %>
+  <hr>
+  <h3>Why this stack?</h3>
+  <%= simple_format(overview) %>
+<% end %>
+
+<hr>
+
+<%# page navigation %>
+<div class="d-flex flex-wrap gap-3">
+  <%= link_to '← New recommendation',
+              new_recommendation_session_path,
+              class: 'btn btn-outline-secondary' %>
+
+  <% if user_signed_in? %>
+    <%= link_to 'Recommendation history',
+                recommendation_sessions_path,
+                class: 'btn btn-primary' %>
+  <% end %>
+</div>
