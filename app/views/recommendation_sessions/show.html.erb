@@ -14,6 +14,7 @@ rows =
   end
 total    = (data['total_monthly_cost'] || 0).to_f
 overview = data['overview'].to_s.strip
+goal     = Array(@session.area_of_interest).reject(&:blank?).first.to_s
 %>
 
 <%# show table if we have results %>
@@ -35,6 +36,7 @@ overview = data['overview'].to_s.strip
         <th>Dosage</th>
         <th>Retailer</th>
         <th>Reason</th>
+        <th>Research</th>
       </tr>
     </thead>
 
@@ -70,6 +72,15 @@ overview = data['overview'].to_s.strip
           </td>
 
           <td><%= item['reason'] %></td>
+
+         <td>
+       <%= link_to "PubMed",
+              pubmed_search_url(supp_name, @session.area_of_interest),
+              target: "_blank",
+              rel:    "noopener",
+              class:  "btn btn-sm btn-outline-secondary" %>
+        </td>
+
         </tr>
       <% end %>
     </tbody>
@@ -92,11 +103,8 @@ overview = data['overview'].to_s.strip
 <%# page navigation %>
 <div class="d-flex flex-wrap gap-3">
   <%= link_to '← Home', root_path, class: 'btn btn-outline-secondary' %>
-
   <%= link_to 'New recommendation', new_recommendation_session_path, class: 'btn btn-outline-primary' %>
-
   <% if user_signed_in? %>
     <%= link_to 'Recommendation history', recommendation_sessions_path, class: 'btn btn-primary' %>
   <% end %>
 </div>
-

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Helpers shared across the app
 module ApplicationHelper
   # Convert flash types to Bootstrap classes
   def bootstrap_class_for_flash(flash_type)
@@ -10,4 +9,7 @@ module ApplicationHelper
     else "info"
     end
   end
+
+
+  
 end
