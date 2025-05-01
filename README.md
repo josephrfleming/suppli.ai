@@ -1,40 +1,26 @@
-Suppli Ai is a personalized supplement recommendation app that helps users make smarter health decisions based on science—not hype. Users enter their health goals, budget, dietary preferences, and current medications/supplements, and the app generates a customized stack of recommendations using OpenAI's GPT-4o model.
+# README
 
-Each recommendation includes:
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-Estimated monthly cost
+Things you may want to cover:
 
-Dosage and usage info
+* Ruby version
 
-Retailer link (iHerb only, for safety and transparency)
+* System dependencies
 
-PubMed research link for evidence-backed results
+* Configuration
 
+* Database creation
 
-🛠️ Tech stack
-Ruby on Rails 8 (server-rendered)
+* Database initialization
 
-PostgreSQL (data storage)
+* How to run the test suite
 
-OpenAI API (GPT-4o for recommendations)
+* Services (job queues, cache servers, search engines, etc.)
 
-Bootstrap 5 (modern UI)
+* Deployment instructions
 
-Stimulus (for small interactions like loading spinners)
-
-Render.com (deployment)
-
-🚀 Features
-Science-backed recommendations tailored to your health profile
-
-Price-based filtering (makes the most of your budget)
-
-Interaction screening with your medications
-
-Live PubMed research links for every supplement
-
-Fast, clean UI with no signup required
-
-
+* ...
 
 
