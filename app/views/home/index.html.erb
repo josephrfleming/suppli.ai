@@ -1,48 +1,57 @@
 <!-- app/views/home/index.html.erb -->
 <div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-lg-8 text-center">
+  <div class="text-center mb-5">
+    <h1 class="display-4 fw-bold text-glow">Suppli Ai</h1>
+    <p class="lead text-muted">
+      Get personalized, science-backed supplement plans based on your health goals and preferences.
+    </p>
+  </div>
 
-      <h1 class="display-4 mb-4"><%= @title %></h1>
-
-      <div class="lead mb-5">
-        <%= raw @content %>
+  <% unless user_signed_in? %>
+    <!-- Guest actions -->
+    <div class="row justify-content-center gy-3">
+      <div class="col-md-4">
+        <div class="card shadow-sm rounded p-4 h-100 text-center bg-light border-0">
+          <h5 class="fw-semibold mb-3">Log in</h5>
+          <%= link_to "Log in", new_user_session_path, class: "btn btn-outline-primary w-100" %>
+        </div>
       </div>
 
-      <% unless user_signed_in? %>
-        <!-- guest options -->
-        <div class="d-grid gap-3 d-sm-flex justify-content-center">
-          <%= link_to "Log in",
-                      new_user_session_path,
-                      class: "btn btn-outline-primary btn-lg px-4" %>
-
-          <%= link_to "Register",
-                      new_user_registration_path,
-                      class: "btn btn-primary btn-lg px-4" %>
-
-          <%= link_to "Try without signing up",
-                      new_recommendation_session_path,
-                      class: "btn btn-success btn-lg px-4" %>
+      <div class="col-md-4">
+        <div class="card shadow-sm rounded p-4 h-100 text-center bg-light border-0">
+          <h5 class="fw-semibold mb-3">Register</h5>
+          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary w-100" %>
         </div>
+      </div>
 
-      <% else %>
-        <!-- logged-in options -->
-        <div class="d-grid gap-3 d-sm-flex justify-content-center">
-          <%= link_to "Recommendation history",
-                      recommendation_sessions_path,
-                      class: "btn btn-primary btn-lg px-4" %>
-
-          <%= link_to "New recommendation",
-                      new_recommendation_session_path,
-                      class: "btn btn-success btn-lg px-4" %>
-
-          <%= button_to "Log out",
-                        destroy_user_session_path,
-                        method:  :delete,
-                        class:   "btn btn-outline-danger btn-lg px-4 d-inline" %>
+      <div class="col-md-4">
+        <div class="card shadow-sm rounded p-4 h-100 text-center bg-light border-0">
+          <h5 class="fw-semibold mb-3">No account?</h5>
+          <%= link_to "Try without signing up", new_recommendation_session_path, class: "btn btn-success w-100" %>
         </div>
-      <% end %>
-
+      </div>
     </div>
-  </div>
+
+  <% else %>
+    <!-- Logged-in actions -->
+    <div class="row justify-content-center gy-3">
+      <div class="col-md-5">
+        <div class="card shadow-sm rounded p-4 h-100 text-center bg-light border-0">
+          <h5 class="fw-semibold mb-3">View your history</h5>
+          <%= link_to "Recommendation history", recommendation_sessions_path, class: "btn btn-primary w-100" %>
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="card shadow-sm rounded p-4 h-100 text-center bg-light border-0">
+          <h5 class="fw-semibold mb-3">Get a new plan</h5>
+          <%= link_to "New recommendation", new_recommendation_session_path, class: "btn btn-success w-100" %>
+        </div>
+      </div>
+
+      <div class="col-12 text-center mt-3">
+        <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %>
+      </div>
+    </div>
+  <% end %>
 </div>

@@ -1,83 +1,84 @@
 <!-- app/views/recommendation_sessions/new.html.erb -->
-<%= form_with model: @session,
-              url:   recommendation_sessions_path,
-              class: "card p-4" do |f| %>
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card shadow p-4 mb-4">
 
-  <h2 class="h4 mb-4">Personalize Your Recommendations</h2>
+        <%= form_with model: @session, url: recommendation_sessions_path, local: true do |f| %>
+          <h2 class="h4 mb-4 text-glow">Personalize Your Recommendations</h2>
 
-  <!-- ▸ Budget slider -->
-  <div class="mb-4" data-controller="range">
-    <%= f.label :budget, "Budget", class: "form-label fw-semibold" %>
+          <!-- Budget slider -->
+          <div class="mb-4" data-controller="range">
+            <%= f.label :budget, "Budget", class: "form-label fw-semibold" %>
+            <%= f.range_field :budget,
+                              in: 10..300,
+                              step: 10,
+                              value: @session.budget,
+                              data: { range_target: "input", action: "input->range#update" },
+                              class: "form-range" %>
+            <small class="text-muted">
+              $<span data-range-target="value"><%= @session.budget %></span>
+            </small>
+          </div>
 
-    <%= f.range_field :budget,
-                      in:   10..300,
-                      step: 10,
-                      value: @session.budget,
-                      data:  { range_target: "input",
-                               action:       "input->range#update" },
-                      class: "form-range" %>
+          <!-- Area of interest -->
+          <div class="mb-4">
+            <%= f.label :area_of_interest, "Area of interest", class: "form-label fw-semibold" %>
+            <%= f.select :area_of_interest,
+                         %w[Brain\ Health Heart\ Health Athletic\ Performance Immune\ Support Sleep Skin/Hair/Nails],
+                         {}, multiple: true, class: "form-select" %>
+          </div>
 
-    <small class="text-muted">
-      $<span data-range-target="value"><%= @session.budget %></span>
-    </small>
-  </div>
+          <!-- Dietary restrictions -->
+          <div class="mb-4">
+            <%= f.label :dietary_restrictions, "Dietary restriction", class: "form-label fw-semibold" %><br>
+            <% %w[Vegan Vegetarian Gluten-Free].each do |diet| %>
+              <div class="form-check form-check-inline">
+                <%= f.check_box :dietary_restrictions,
+                                { multiple: true, class: "form-check-input" },
+                                diet, nil %>
+                <%= f.label :dietary_restrictions, diet,
+                            value: diet, class: "form-check-label" %>
+              </div>
+            <% end %>
+          </div>
 
-  <!-- ▸ Area of interest -->
-  <div class="mb-4">
-    <%= f.label :area_of_interest, "Area of interest", class: "form-label fw-semibold" %>
-    <%= f.select :area_of_interest,
-                 %w[Brain\ Health Heart\ Health Athletic\ Performance
-                    Immune\ Support Sleep Skin/Hair/Nails],
-                 {}, multiple: true, class: "form-select" %>
-  </div>
+          <!-- Medical conditions -->
+          <div class="mb-4">
+            <%= f.label :medical_conditions, "Medical conditions", class: "form-label fw-semibold" %>
+            <%= f.text_field :medical_conditions,
+                             class: "form-control",
+                             placeholder: "e.g. Type-2 diabetes, dementia" %>
+          </div>
 
-  <!-- ▸ Dietary restrictions -->
-  <div class="mb-4">
-    <%= f.label :dietary_restrictions, "Dietary restriction",
-                class: "form-label fw-semibold" %><br>
-    <% %w[Vegan Vegetarian Gluten-Free].each do |diet| %>
-      <div class="form-check form-check-inline">
-        <%= f.check_box :dietary_restrictions,
-                        { multiple: true, class: "form-check-input" },
-                        diet, nil %>
-        <%= f.label :dietary_restrictions, diet,
-                    value: diet, class: "form-check-label" %>
+          <!-- Current medications -->
+          <div class="mb-4">
+            <%= f.label :current_medications, "Current medications", class: "form-label fw-semibold" %>
+            <%= f.text_field :current_medications,
+                             class: "form-control",
+                             placeholder: "e.g. Metformin, Atorvastatin" %>
+          </div>
+
+          <!-- Current supplements -->
+          <div class="mb-4">
+            <%= f.label :current_supplements, "Current supplements", class: "form-label fw-semibold" %>
+            <%= f.text_field :current_supplements,
+                             class: "form-control",
+                             placeholder: "e.g. Vitamin D3, Omega-3" %>
+          </div>
+
+          <%= f.submit "Get Recommendations", class: "btn btn-primary btn-lg w-100" %>
+        <% end %>
+
       </div>
-    <% end %>
+
+      <!-- navigation -->
+      <div class="d-flex gap-3">
+        <%= link_to "← Home", root_path, class: "btn btn-outline-secondary" %>
+        <% if user_signed_in? %>
+          <%= link_to "Recommendation history", recommendation_sessions_path, class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
   </div>
-
-  <!-- ▸ Medical info -->
-  <div class="mb-4">
-    <%= f.label :medical_conditions, "Medical conditions", class: "form-label fw-semibold" %>
-    <%= f.text_field :medical_conditions,
-                     class: "form-control",
-                     placeholder: "e.g. Type-2 diabetes, dementia" %>
-  </div>
-
-  <div class="mb-4">
-    <%= f.label :current_medications, "Current medications", class: "form-label fw-semibold" %>
-    <%= f.text_field :current_medications,
-                     class: "form-control",
-                     placeholder: "e.g. Metformin, Atorvastatin" %>
-  </div>
-
-  <div class="mb-4">
-    <%= f.label :current_supplements, "Current supplements", class: "form-label fw-semibold" %>
-    <%= f.text_field :current_supplements,
-                     class: "form-control",
-                     placeholder: "e.g. Vitamin D3, Omega-3" %>
-  </div>
-
-  <%= f.submit "Get Recommendations", class: "btn btn-primary btn-lg w-100" %>
-<% end %>
-
-<!-- navigation -->
-<div class="d-flex gap-3 mt-3">
-  <%= link_to "← Home", root_path, class: "btn btn-outline-secondary" %>
-
-  <% if user_signed_in? %>
-    <%= link_to "Recommendation history",
-                recommendation_sessions_path,
-                class: "btn btn-primary" %>
-  <% end %>
 </div>

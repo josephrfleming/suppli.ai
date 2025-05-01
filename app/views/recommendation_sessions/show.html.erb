@@ -73,13 +73,14 @@ goal     = Array(@session.area_of_interest).reject(&:blank?).first.to_s
 
           <td><%= item['reason'] %></td>
 
-         <td>
-       <%= link_to "PubMed",
-              pubmed_search_url(supp_name, @session.area_of_interest),
+          <td>
+            <%= link_to "PubMed",
+              pubmed_search_url(supp_name, goal),
               target: "_blank",
               rel:    "noopener",
               class:  "btn btn-sm btn-outline-secondary" %>
-        </td>
+          </td>
+
 
         </tr>
       <% end %>
