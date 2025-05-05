@@ -29,7 +29,7 @@ gem "redis", "~> 4.0"                   # Sidekiq backend
 gem "sidekiq-scheduler", require: false # Cron-style jobs
 gem "view_component"                    # Re-usable view objects
 gem "kaminari"                          # Pagination
-gem "ruby-openai", "~> 4.0"             # OpenAI API client
+gem "ruby-openai", "~> 8.1"             # OpenAI API client
 
 ########################################
 # Quality-of-life & deployment
