@@ -1,10 +1,12 @@
 <!-- app/views/recommendation_sessions/show.html.erb -->
 <h1>Your Personalized Recommendations</h1>
 
-<%# normalize data shape %>
+<%# ------------------------------------------------------------
+     1. Normalise the AI JSON once
+------------------------------------------------------------- %>
 <%
-data = @session.result_json.is_a?(Hash) ? @session.result_json : {}
-rows =
+data  = @session.result_json.is_a?(Hash) ? @session.result_json : {}
+rows  =
   if @session.result_json.is_a?(Array)
     @session.result_json
   elsif data['supplements'].is_a?(Array)
@@ -14,10 +16,11 @@ rows =
   end
 total    = (data['total_monthly_cost'] || 0).to_f
 overview = data['overview'].to_s.strip
-goal     = Array(@session.area_of_interest).reject(&:blank?).first.to_s
 %>
 
-<%# show table if we have results %>
+<%# ------------------------------------------------------------
+     2. Results table
+------------------------------------------------------------- %>
 <% if rows.any? %>
   <% if total.positive? %>
     <p class="fw-semibold mb-3">
@@ -74,14 +77,13 @@ goal     = Array(@session.area_of_interest).reject(&:blank?).first.to_s
           <td><%= item['reason'] %></td>
 
           <td>
+            <!-- ⤵︎  send full area_of_interest; helper cleans it up -->
             <%= link_to "PubMed",
-              pubmed_search_url(supp_name, goal),
-              target: "_blank",
-              rel:    "noopener",
-              class:  "btn btn-sm btn-outline-secondary" %>
+                        pubmed_search_url(supp_name, @session.area_of_interest),
+                        target: "_blank",
+                        rel:    "noopener",
+                        class:  "btn btn-sm btn-outline-secondary" %>
           </td>
-
-
         </tr>
       <% end %>
     </tbody>
@@ -92,7 +94,9 @@ goal     = Array(@session.area_of_interest).reject(&:blank?).first.to_s
   </p>
 <% end %>
 
-<%# show overview if present %>
+<%# ------------------------------------------------------------
+     3. Overview paragraph (high-level explanation)
+------------------------------------------------------------- %>
 <% if overview.present? %>
   <hr>
   <h3>Why this stack?</h3>
@@ -101,7 +105,9 @@ goal     = Array(@session.area_of_interest).reject(&:blank?).first.to_s
 
 <hr>
 
-<%# page navigation %>
+<%# ------------------------------------------------------------
+     4. Navigation
+------------------------------------------------------------- %>
 <div class="d-flex flex-wrap gap-3">
   <%= link_to '← Home', root_path, class: 'btn btn-outline-secondary' %>
   <%= link_to 'New recommendation', new_recommendation_session_path, class: 'btn btn-outline-primary' %>
