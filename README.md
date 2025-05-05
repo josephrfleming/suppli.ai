@@ -1,26 +1,38 @@
-# README
+Suppli Ai
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Suppli Ai is a personalized supplement recommendation app that helps users make smarter health decisions based on science—not hype.
 
-Things you may want to cover:
+Each recommendation includes:
 
-* Ruby version
+Estimated monthly cost
 
-* System dependencies
+Dosage and usage info
 
-* Configuration
+Retailer link (iHerb only, for safety and transparency)
 
-* Database creation
+PubMed research link for evidence-backed results
 
-* Database initialization
 
-* How to run the test suite
+Tech stack
+Ruby on Rails 8 (server-rendered)
 
-* Services (job queues, cache servers, search engines, etc.)
+PostgreSQL (data storage)
 
-* Deployment instructions
+OpenAI API (GPT-4o for recommendations)
 
-* ...
+Bootstrap 5 (modern UI)
 
+Stimulus (for small interactions like loading spinners)
+
+Render.com (deployment)
+
+
+Features
+Science-backed recommendations tailored to your health profile
+
+Interaction screening with your medications
+
+Live PubMed research links for every supplement
+
+Fast, clean UI with no signup required
 
