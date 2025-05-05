@@ -1,4 +1,4 @@
-# app/models/product.rb  (continuing from above)
+# app/models/product.rb  
 class Product < ApplicationRecord
   belongs_to :user
   belongs_to :category, optional: true
@@ -11,10 +11,10 @@ class Product < ApplicationRecord
   validates :price, presence: true,
                     numericality: { greater_than_or_equal_to: 0 }
   validates :active, inclusion: { in: [true, false] }
-  # Example format validation (if SKU code consists of alphanumeric only):
+  # Example format validation 
   validates :sku, format: { with: /\A[A-Z0-9]+\z/, message: "only allows letters and numbers" }, allow_nil: true
 
-  # Scope definitions...
+  # Scope def
   scope :active, -> { where(active: true) }
   scope :recent, -> { order(created_at: :desc) }
 end

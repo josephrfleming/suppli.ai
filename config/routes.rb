@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     sign_up:  "register"
   }
 
-  # Sidekiq UI (admin only, if Sidekiq is enabled)
+  # Sidekiq UI 
   class AdminConstraint
     def self.matches?(request)
       id = request.session["warden.user.user.key"]&.dig(0, 0)
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   resources :tags,       only: %i[index show]
 
   resources :recommendation_sessions, only: %i[index new create show] do
-    get :explanation, on: :member  # opens separately
+    get :explanation, on: :member 
   end
 
   # uptime check

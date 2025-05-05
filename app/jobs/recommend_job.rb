@@ -6,7 +6,7 @@ class RecommendJob
     session = RecommendationSession.find_by(id: session_id)
     return if session.nil?  # skip if not found
 
-    # mock AI results (replace with real logic)
+    # mock AI results 
     ai_results_array = [
       { supplement_id: 12, price: 29.99, retailer: "Amazon",
         reason: "Clinically proven for sleep" },

@@ -1,15 +1,15 @@
 # app/helpers/research_helper.rb
 module ResearchHelper
-  # Build a PubMed search URL from supplement + goal(s)
+  # Build a PubMed search URL from supplement + goal
   def pubmed_search_url(supplement_name, goal)
     goals =
       case goal
       when Array
         goal
       when String
-        str = goal.strip                       # ← remove leading/trailing spaces
+        str = goal.strip                       
         if str.start_with?("[") && str.end_with?("]")
-          JSON.parse(str) rescue [str]         # try JSON-decode, fall back
+          JSON.parse(str) rescue [str]        
         else
           [str]
         end
