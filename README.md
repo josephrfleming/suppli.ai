@@ -1,6 +1,6 @@
 Suppli Ai
 
-Suppli Ai is a personalized supplement recommendation app that helps users make smarter health decisions based on science—not hype.
+Suppli Ai is a personalized supplement recommendation app that helps users make smarter health decisions based on science.
 
 Each recommendation includes:
 
