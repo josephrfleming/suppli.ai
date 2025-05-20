@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
 
   # GET /products/:id — show single product
   def show
+    # NOTE: To implement DRY principle, you could add this as before_action or after_action
     authorize @product
   end
 

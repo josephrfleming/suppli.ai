@@ -2,6 +2,7 @@
 
 require "uri"
 
+# NOTE: This is cool
 module RecommendationSessionsHelper
   # Return a search URL for a given retailer and supplement
   def retailer_url(retailer, supplement_name)

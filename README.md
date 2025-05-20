@@ -36,3 +36,7 @@ Live PubMed research links for every supplement
 
 Fast, clean UI with no signup required
 
+<!-- 
+1: Please use Markdown syntax
+2: There is no instructions on how to run this locally
+ -->

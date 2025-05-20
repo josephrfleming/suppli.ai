@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# NOTE: Nice Job
 class AiRecommender
   MODEL = ENV.fetch('OPENAI_CHAT_MODEL', 'gpt-4o').freeze
 

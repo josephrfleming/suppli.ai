@@ -4,6 +4,7 @@ class HomeController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
 
   def index
+    # NOTE: What are these variables being used for ? 
     @title   = "Suppli Ai"
     @content = "<p>Welcome! Log in or register to begin.</p>"
   end

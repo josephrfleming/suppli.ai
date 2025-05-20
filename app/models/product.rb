@@ -19,6 +19,7 @@ class Product < ApplicationRecord
   scope :recent, -> { order(created_at: :desc) }
 end
 
+# NOTE: Why do we have the other models in the product.rb file? 
 # app/models/category.rb
 class Category < ApplicationRecord
   has_many :products, dependent: :restrict_with_error

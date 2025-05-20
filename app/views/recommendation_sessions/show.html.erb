@@ -2,6 +2,7 @@
 <h1>Your Personalized Recommendations</h1>
 
 <%# normalise gpt JSON %>
+<%#  NOTE: It's better to put this in the model %>
 <%
 data  = @session.result_json.is_a?(Hash) ? @session.result_json : {}
 rows  =
