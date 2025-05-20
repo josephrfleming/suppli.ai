@@ -1,6 +1,7 @@
 # app/lib/openai_client.rb
 require "openai"
 
+# NOTE: Nice job adding the OPENAI! However, you should have a configuration in your README, that say something like 'OPENAI API KEY needed' to run this locally 
 class OpenaiClient
   def self.chat(messages, **opts)
     client.chat(

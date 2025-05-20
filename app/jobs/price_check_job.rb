@@ -2,6 +2,8 @@
 class PriceCheckJob < ApplicationJob
   queue_as :default  # Sidekiq default queue
 
+  # NOTE: Cool background job 
+
   def perform(product_id)
     product = Product.find_by(id: product_id)
     return unless product && product.active?  # skip if missing or inactive
